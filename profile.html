@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Cá Nhân & Kết Quả Bài Tập 43</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .bt42-dropdown {
+            background-color: var(--light-bg);
+            border: 2px dashed var(--secondary-color);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        .bt42-dropdown summary {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            outline: none;
+            list-style: none;
+        }
+        .bt42-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+        .bt42-dropdown summary::before {
+            content: "▶ ";
+            margin-right: 5px;
+        }
+        .bt42-dropdown[open] summary::before {
+            content: "▼ ";
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>C++ Learning Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="chapter1.html">Chương Học Phần</a></li>
+                <li><a href="practice.html">Thực Hành</a></li>
+                <li><a href="exam.html">Kiểm Tra & Thi</a></li>
+                <li><a href="admin.html">Quản Trị (Admin)</a></li>
+                <li><a href="profile.html">Thông Tin Cá Nhân</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container" style="text-align: center;">
+        <h2>Thông Tin Sinh Viên</h2>
+        
+        <!-- Ảnh đại diện cá nhân avt.jpg -->
+        <img src="avt.jpg" alt="Avatar Lê Quang Long" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--secondary-color);">
+        
+        <h3 style="margin-bottom: 0.5rem;">Họ và tên: Lê Quang Long</h3>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 1.5rem;">Mã Số Sinh Viên (MSV): 231A011163</p>
+        
+        <div style="background: #f1f2f6; padding: 1.5rem; border-radius: 6px; text-align: left; width: 100%; max-width: 700px; margin: 0 auto;">
+            <p><strong>Lớp / Chuyên ngành:</strong> Công nghệ Thông tin / An toàn thông tin</p>
+            <p><strong>Môn học:</strong> Lập trình Web / Cuối kỳ C++ (Bài tập 44)</p>
+            
+            <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #ccc;">
+            
+            <!-- Menu bấm để xem kết quả Bài tập 43 cũ -->
+            <details class="bt42-dropdown">
+                <summary>👉 Bấm vào đây để xem kết quả Bài tập 43 (cũ)</summary>
+                
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ddd; text-align: center;">
+                    <p style="font-size: 0.95rem; color: #333; margin-bottom: 0.5rem;"><strong>Hình ảnh kết quả Bài tập 43 (bt43.png):</strong></p>
+                    <a href="bt43.png" target="_blank">
+                        <img src="bt43.png" alt="Kết quả Bài tập 43" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    </a>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - C++ Learning Hub</p>
+    </footer>
+</body>
+</html>

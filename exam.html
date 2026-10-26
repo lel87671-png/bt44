@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Kiểm Tra & Thi Trực Tuyến</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>C++ Learning Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="chapter1.html">Chương Học Phần</a></li>
+                <li><a href="practice.html">Thực Hành</a></li>
+                <li><a href="exam.html">Kiểm Tra & Thi</a></li>
+                <li><a href="admin.html">Quản Trị (Admin)</a></li>
+                <li><a href="profile.html">Thông Tin Cá Nhân</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Cửa Sổ Kiểm Tra & Thi Trực Tiếp</h2>
+        
+        <form id="examForm">
+            <div class="form-group">
+                <label for="fullName">Họ và Tên:</label>
+                <input type="text" id="fullName" required placeholder="Nhập họ và tên của bạn...">
+            </div>
+
+            <div class="form-group">
+                <label for="studentId">Mã Số Sinh Viên (MSV):</label>
+                <input type="text" id="studentId" required placeholder="Nhập mã sinh viên (Ví dụ: 231A011163)...">
+            </div>
+
+            <div class="form-group">
+                <label for="modeSelect">Chọn Phần:</label>
+                <select id="modeSelect" onchange="toggleMode()">
+                    <option value="kiemtra">Phần Kiểm Tra (Chọn 1 bài tập)</option>
+                    <option value="thi">Phần Thi (Chọn 2 đến 3 bài tập)</option>
+                </select>
+            </div>
+
+            <!-- Khu vực chọn bài cho Kiểm tra -->
+            <div class="form-group" id="kiemtraGroup">
+                <label for="exCheck">Chọn Bài Tập Kiểm Tra:</label>
+                <select id="exCheck">
+                    <option value="ex1">[Dễ] Bài 1: Tính tổng hai số nguyên</option>
+                    <option value="ex2">[Trung bình] Bài 2: Kiểm tra số nguyên tố</option>
+                    <option value="ex3">[Khó] Bài 3: Sắp xếp mảng số nguyên</option>
+                </select>
+            </div>
+
+            <!-- Khu vực chọn bài cho Thi -->
+            <div class="form-group" id="thiGroup" style="display: none;">
+                <label>Chọn Tổ Hợp Bài Thi (Từ 2 đến 3 bài):</label>
+                <div style="background: #f1f2f6; padding: 10px; border-radius: 4px;">
+                    <label><input type="checkbox" name="thiEx" value="ex1" checked> [Dễ] Bài 1: Tính tổng hai số nguyên</label><br>
+                    <label><input type="checkbox" name="thiEx" value="ex2"> [Trung bình] Bài 2: Kiểm tra số nguyên tố</label><br>
+                    <label><input type="checkbox" name="thiEx" value="ex3"> [Khó] Bài 3: Sắp xếp mảng số nguyên</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="codeSolution">Nhập Lời Giải C++:</label>
+                <textarea id="codeSolution" placeholder="// Viết code C++ giải quyết bài toán..."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Nộp Bài & Chấm Điểm Tự Động</button>
+        </form>
+
+        <div id="resultBox" class="result-box">
+            <h3>Kết Quả Chấm Điểm Chi Tiết</h3>
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const mode = document.getElementById('modeSelect').value;
+            if (mode === 'kiemtra') {
+                document.getElementById('kiemtraGroup').style.display = 'block';
+                document.getElementById('thiGroup').style.display = 'none';
+            } else {
+                document.getElementById('kiemtraGroup').style.display = 'none';
+                document.getElementById('thiGroup').style.display = 'block';
+            }
+        }
+
+        document.getElementById('examForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fullName').value.trim();
+            const msv = document.getElementById('studentId').value.trim();
+            const mode = document.getElementById('modeSelect').value;
+            const code = document.getElementById('codeSolution').value.trim();
+            const resultBox = document.getElementById('resultBox');
+            const resultText = document.getElementById('resultText');
+
+            if (!name || !msv || !code) {
+                alert('Vui lòng điền đầy đủ Họ tên, Mã sinh viên và Lời giải!');
+                return;
+            }
+
+            if (mode === 'thi') {
+                const checkedEx = document.querySelectorAll('input[name="thiEx"]:checked');
+                if (checkedEx.length < 2 || checkedEx.length > 3) {
+                    alert('Phần Thi yêu cầu bạn phải chọn từ 2 đến 3 bài tập!');
+                    return;
+                }
+            }
+
+            // Giả lập hệ thống chấm điểm dựa trên 5 bộ test case (Mỗi test 2 điểm)
+            let passedTests = 0;
+            if (code.includes('int main') && (code.includes('cout') || code.includes('cin'))) {
+                passedTests = 5; // Vượt qua toàn bộ 5 test case
+            } else if (code.length > 20) {
+                passedTests = 3; // Vượt qua 3/5 test case
+            } else {
+                passedTests = 1; // Vượt qua 1/5 test case
+            }
+
+            let totalScore = passedTests * 2; // 5 test * 2 điểm = 10 điểm tối đa
+
+            resultBox.style.display = 'block';
+            resultText.innerHTML = `<strong>Họ và tên:</strong> ${name} (<span style="color:var(--secondary-color);">${msv}</span>)<br>
+                                    <strong>Chế độ:</strong> ${mode === 'kiemtra' ? 'Kiểm Tra (1 Bài)' : 'Thi Trực Tuyến'}<br>
+                                    <strong>Kết quả Test Case:</strong> Đã vượt qua <strong>${passedTests}/5</strong> bộ test tiêu chuẩn.<br>
+                                    <strong>Tổng Điểm Đạt Được:</strong> <span style="color: #e74c3c; font-size: 1.3rem; font-weight: bold;">${totalScore}/10 điểm</span>`;
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2026 - C++ Learning Hub</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Trị Admin - Cấu Hình Bài Tập & Test Cases</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>C++ Learning Hub - Admin</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="chapter1.html">Chương Học Phần</a></li>
+                <li><a href="practice.html">Thực Hành</a></li>
+                <li><a href="exam.html">Kiểm Tra & Thi</a></li>
+                <li><a href="admin.html">Quản Trị (Admin)</a></li>
+                <li><a href="profile.html">Thông Tin Cá Nhân</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Trang Quản Trị: Cấu Hình Bài Tập & Bộ Test Case</h2>
+        <p>Giao diện cho phép Admin thêm/sửa danh sách bài tập cho phần Kiểm tra & Thi, kèm theo cấu hình 5 bộ test case đầu vào (Input) và đầu ra (Output) tương ứng.</p>
+
+        <form id="adminForm">
+            <div class="form-group">
+                <label for="exTitle">Tên Bài Tập:</label>
+                <input type="text" id="exTitle" required placeholder="Nhập tên bài tập (VD: Tính tổng A + B)...">
+            </div>
+
+            <div class="form-group">
+                <label for="exLevel">Mức Độ:</label>
+                <select id="exLevel">
+                    <option value="easy">Dễ</option>
+                    <option value="medium">Trung bình</option>
+                    <option value="hard">Khó</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="testCases">Cấu Hình 5 Bộ Test Case (Input -> Expected Output):</label>
+                <textarea id="testCases" placeholder="Test 1: In: 3 5 -> Out: 8&#10;Test 2: In: -1 1 -> Out: 0&#10;... (Mỗi bộ test đúng tính 2 điểm)"></textarea>
+            </div>
+
+            <button type="submit" class="btn">Lưu Bài Tập Vào Hệ Thống</button>
+        </form>
+
+        <div id="adminNotice" class="result-box">
+            <h3>Thành công!</h3>
+            <p>Đã cập nhật bài tập và thiết lập thành công 5 bộ test case vào ngân hàng đề thi hệ thống.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('exTitle').value.trim();
+            if(!title) {
+                alert('Vui lòng nhập tên bài tập!');
+                return;
+            }
+            document.getElementById('adminNotice').style.display = 'block';
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2026 - C++ Learning Hub</p>
+    </footer>
+</body>
+</html>
